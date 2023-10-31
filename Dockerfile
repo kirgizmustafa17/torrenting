@@ -21,5 +21,8 @@ RUN wget https://github.com/Jackett/Jackett/releases/download/$release/$file
 RUN tar xf $file
 RUN rm $file
 RUN apt-get clean
-RUN ./Jackett/jackett &
-RUN qbittorrent-nox &
+
+ENTRYPOINT qbittorrent-nox --torrenting-port=63295
+ENTRYPOINT ./Jackett/jackett
+
+EXPOSE 9117 8080 63295
