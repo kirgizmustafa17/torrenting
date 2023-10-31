@@ -6,9 +6,8 @@ ENV DEBIAN_FRONTEND="noninteractive"
 ENV release="v0.21.1112"
 ENV file="Jackett.Binaries.LinuxAMDx64.tar.gz"
 
-
 RUN mkdir -p /root/.config/qBittorrent/
-RUN echo W0xlZ2FsTm90aWNlXQpBY2NlcHRlZD10cnVlCgpbUHJlZmVyZW5jZXNdCldlYlVJXEhvc3RIZWFkZXJWYWxpZGF0aW9uPWZhbHNlCkRvd25sb2Fkc1xTYXZlUGF0aD0vZG93bmxvYWRzLw== | base64 --decode > /root/.config/qBittorrent/qBittorrent.conf
+RUN echo W0xlZ2FsTm90aWNlXQpBY2NlcHRlZD10cnVlCgpbUHJlZmVyZW5jZXNdCldlYlVJXEhvc3RIZWFkZXJWYWxpZGF0aW9uPWZhbHNlCkRvd25sb2Fkc1xTYXZlUGF0aD0>
 
 RUN apt update
 RUN apt upgrade -y
@@ -22,7 +21,14 @@ RUN tar xf $file
 RUN rm $file
 RUN apt-get clean
 
-ENTRYPOINT qbittorrent-nox --torrenting-port=63295
-ENTRYPOINT ./Jackett/jackett
+COPY start.sh /app/
 
-EXPOSE 9117 8080 63295
+
+RUN chmod +x /app/start.sh
+ENTRYPOINT /app/start.sh
+#ENTRYPOINT qbittorrent-nox --torrenting-port=63295
+#ENTRYPOINT ./Jackett/jackett
+
+
+#CMD ["qbittorrent-nox", "--torrenting-port=63295"]
+#CMD ["./Jackett/jackett"]
