@@ -4,7 +4,7 @@ WORKDIR /app
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
-RUN echo W0xlZ2FsTm90aWNlXQpBY2NlcHRlZD10cnVlCgpbUHJlZmVyZW5jZXNdCldlYlVJXEhvc3RIZWFkZXJWYWxpZGF0aW9uPWZhbHNlCkRvd25sb2Fkc1xTYXZlUGF0aD0vZG93bmxvYWRzLw== | base64 --decode > /root/.config/qBittorrent/
+RUN mkdir /root/.config/qBittorrent/; echo W0xlZ2FsTm90aWNlXQpBY2NlcHRlZD10cnVlCgpbUHJlZmVyZW5jZXNdCldlYlVJXEhvc3RIZWFkZXJWYWxpZGF0aW9uPWZhbHNlCkRvd25sb2Fkc1xTYXZlUGF0aD0vZG93bmxvYWRzLw== | base64 --decode > /root/.config/qBittorrent/qBittorrent.conf
 
 RUN apt update && \
     apt upgrade -y && \
