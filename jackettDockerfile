@@ -3,12 +3,13 @@ FROM ubuntu:22.04
 WORKDIR /app
 
 ENV DEBIAN_FRONTEND="noninteractive"
-ENV release="v0.21.1112"
-ENV file="Jackett.Binaries.LinuxAMDx64.tar.gz"
 
 RUN apt update
 RUN apt upgrade -y
-RUN apt install -y wget libicu-dev
+RUN apt install -y libicu-dev
 
-RUN wget https://github.com/Jackett/Jackett/releases/download/$release/$file tar xf $file && rm $file
-ENTRYPOINT ./Jackett/jackett
+USER appuser
+
+COPY Jackett/ .
+
+CMD ["./Jackett/jackett"]
