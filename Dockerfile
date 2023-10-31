@@ -23,4 +23,4 @@ RUN \
 #    apt update; \
 #    apt install -y mono-devel; \
     ./Jackett/jackett &; \
-    qbittorrent-nox &; \
+    qbittorrent-nox &
